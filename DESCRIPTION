@@ -26,3 +26,6 @@ LazyData: true
 RoxygenNote: 7.1.2
 Roxygen: list(markdown = TRUE)
 URL: https://github.com/metapsy-project/metapsyData
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3

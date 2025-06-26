@@ -18,7 +18,7 @@ for (i in seq_along(all_data$shorthand)) {
         )
         d <- suppressMessages(getData(shorthand))
         expect_true(is.list(d) || "R6" %in% class(d)) # Return value is OOP/class-based object
-        # Could also check if the data has the expected structure 
+        # Could also check if the data has the expected structure ——
     })
 }
 message("getData errors for nonexistent data")

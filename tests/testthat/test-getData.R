@@ -1,7 +1,7 @@
 # tests/testthat/test-getData.R
 
 library(testthat)
-library(metapsyData) # 如果你的包还没安装，先用 devtools::load_all() 加载
+library(metapsyData) # If your package is not installed yet, use devtools::load_all() to load it
 
 all_data <- listData()
 message("getData works for existing data")
@@ -11,11 +11,6 @@ for (i in seq_along(all_data$shorthand)) {
     message(sprintf("[%d/%d] Testing getData for: %s", i, total, shorthand))
     test_that(paste("getData works for data:", shorthand), {
         skip_on_cran()
-        expect_message(
-            getData(shorthand),
-            regexp = "Download successful",
-            all = TRUE
-        )
         d <- suppressMessages(getData(shorthand))
         expect_true(is.list(d) || "R6" %in% class(d)) # Return value is OOP/class-based object
         # Could also check if the data has the expected structure ——

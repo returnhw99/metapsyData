@@ -10,10 +10,9 @@ for (i in seq_along(all_data$shorthand)) {
     shorthand <- all_data$shorthand[i]
     message(sprintf("[%d/%d] Testing getData for: %s", i, total, shorthand))
     test_that(paste("getData works for data:", shorthand), {
-        skip_on_cran()
+        skip_on_cran() # Skip this test on CRAN, because CRAN does not allow internet access needed for data
         d <- suppressMessages(getData(shorthand))
-        expect_true(is.list(d) || "R6" %in% class(d)) # Return value is OOP/class-based object
-        # Could also check if the data has the expected structure ——
+        expect_true( "R6" %in% class(d)) # Return value is R6class
     })
 }
 message("getData errors for nonexistent data")
@@ -26,7 +25,7 @@ for (i in seq_along(all_data$shorthand)) {
     message(sprintf("[%d/%d] Testing getData for: %s", i, total, shorthand))
     test_that(paste("getData returns data.frame for data:", shorthand), {
         skip_on_cran()
-        d <- getData(shorthand, include.metadata = FALSE)
+        d <- suppressMessages(getData(shorthand, include.metadata = FALSE))
         expect_s3_class(d, "data.frame") #check if the returned object is a data.frame
     })
 }
